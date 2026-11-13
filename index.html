@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CC Motocrafts | Supreme Owner Command Center - Shaik Mujahid</title>
+  <link rel="stylesheet" href="app.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+  <style>
+    body { background: #040711; color: #f1f5f9; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 0; }
+    .owner-header { background: #0a0f1d; border-bottom: 2px solid #f59e0b; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .brand-title { font-size: 1.35rem; font-weight: 900; color: #f59e0b; letter-spacing: 0.5px; }
+    .brand-sub { font-size: 0.85rem; color: #cbd5e1; }
+    .header-badges { display: flex; gap: 8px; align-items: center; }
+    .badge { padding: 6px 14px; border-radius: 6px; font-size: 0.8rem; font-weight: 700; }
+    .badge-gold { background: rgba(245, 158, 11, 0.2); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.4); }
+    .badge-cyan { background: rgba(0, 240, 255, 0.2); color: #00f0ff; border: 1px solid rgba(0, 240, 255, 0.4); }
+    .container { max-width: 1200px; margin: 0 auto; padding: 24px 16px; }
+    .card { background: #0c1324; border: 1px solid #1e293b; border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+    .card-title { font-size: 1.2rem; font-weight: 800; color: #f8fafc; margin-top: 0; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+    .btn { padding: 10px 18px; border-radius: 8px; font-weight: 700; cursor: pointer; border: none; transition: all 0.2s; font-size: 0.9rem; }
+    .btn-gold { background: #f59e0b; color: #050b14; }
+    .btn-gold:hover { background: #d97706; }
+    .btn-primary { background: #00f0ff; color: #050b14; }
+    .btn-primary:hover { background: #38bdf8; }
+    .btn-danger { background: #ef4444; color: white; }
+    .btn-success { background: #10b981; color: white; }
+    .btn-outline { background: transparent; border: 1px solid #334155; color: #cbd5e1; }
+    .btn-outline:hover { background: #1e293b; color: white; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 0.85rem; color: #94a3b8; margin-bottom: 6px; font-weight: 600; }
+    .form-control { width: 100%; box-sizing: border-box; background: #070d17; border: 1px solid #334155; border-radius: 8px; padding: 10px 14px; color: white; font-size: 0.95rem; }
+    .form-control:focus { outline: none; border-color: #f59e0b; }
+    .data-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    .data-table th, .data-table td { padding: 12px; border-bottom: 1px solid #1e293b; text-align: left; }
+    .data-table th { background: #070d17; color: #94a3b8; font-weight: 600; }
+    .cam-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+    .cam-box { background: #070d17; border: 1px solid #1e293b; border-radius: 8px; padding: 16px; text-align: center; }
+    .cam-screen { width: 100%; height: 160px; background: #020617; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #f59e0b; font-family: monospace; font-size: 0.85rem; margin-bottom: 12px; border: 1px solid #1e293b; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="owner-header">
+    <div>
+      <div class="brand-title">CC MOTOCRAFTS • SUPREME OWNER COCKPIT</div>
+      <div class="brand-sub">Shaik Mujahid • Founder, Master Architect & Supreme CEO</div>
+    </div>
+    <div class="header-badges">
+      <span class="badge badge-gold">ABSOLUTE AUTHORITY (000786000)</span>
+      <span class="badge badge-cyan">HOTLINE: +91 8333007351</span>
+      <button class="btn btn-outline" style="padding: 6px 14px;" onclick="ownerLogout()">Logout</button>
+    </div>
+  </header>
+
+  <!-- LOGIN VIEW -->
+  <div id="owner-login-view" class="container" style="max-width: 460px; margin-top: 60px;">
+    <div class="card" style="border-color: #f59e0b;">
+      <h2 style="color: #f59e0b; margin-top: 0; text-align: center;">Master Owner Verification</h2>
+      <p style="color: #94a3b8; font-size: 0.9rem; text-align: center; margin-bottom: 24px;">
+        Enter confidential Supreme Master Passcode to unlock central administrative authority for Shaik Mujahid.
+      </p>
+      <div class="form-group">
+        <label>Executive Role</label>
+        <input type="text" class="form-control" value="Shaik Mujahid (Founder & Supreme Owner)" readonly style="background: #111a2e; color: #f59e0b; font-weight: bold;">
+      </div>
+      <div class="form-group">
+        <label>Master Passcode</label>
+        <input type="password" id="owner-pass-input" class="form-control" placeholder="•••••••••">
+      </div>
+      <div id="owner-login-err" style="color: #ef4444; font-size: 0.85rem; margin-bottom: 12px; display: none;">Invalid Master Passcode. Access Denied.</div>
+      <button class="btn btn-gold" style="width: 100%; padding: 12px;" onclick="ownerLogin()">Unlock Supreme Command Center</button>
+    </div>
+  </div>
+
+  <!-- MAIN OWNER DASHBOARD -->
+  <div id="owner-main-view" class="container" style="display: none;">
+
+    <!-- SECTION 1: GLOBAL CONTACT SWITCHER -->
+    <div class="card">
+      <div class="card-title">
+        <span>🌐 Global Business Contact, Dual-Gmail, Branding & Footer Controller</span>
+      </div>
+      <p style="color: #94a3b8; font-size: 0.85rem; margin-top: -8px; margin-bottom: 16px;">
+        Update your primary hotline (+91 8333007351), Dual-Gmail telemetry channels (aisupport.on@gmail.com & info@ccmotocrafts.in), website brand title, and footer details dynamically across all apps.
+      </p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px;">
+        <div class="form-group">
+          <label>Primary Hotline Display</label>
+          <input type="text" id="cfg-hotline" class="form-control" value="+91 8333007351">
+        </div>
+        <div class="form-group">
+          <label>WhatsApp Redirect Digits</label>
+          <input type="text" id="cfg-whatsapp" class="form-control" value="918333007351">
+        </div>
+        <div class="form-group">
+          <label>Primary AI Telemetry Gmail</label>
+          <input type="email" id="cfg-gmail1" class="form-control" value="aisupport.on@gmail.com">
+        </div>
+        <div class="form-group">
+          <label>Official Business Email</label>
+          <input type="email" id="cfg-gmail2" class="form-control" value="info@ccmotocrafts.in">
+        </div>
+        <div class="form-group" style="grid-column: 1 / -1;">
+          <label>Global Website Brand Title</label>
+          <input type="text" id="cfg-brand" class="form-control" value="CC MOTOCRAFTS AI ENGINE LABS SERVICE">
+        </div>
+        <div class="form-group" style="grid-column: 1 / -1;">
+          <label>Global Footer & Coverage Tagline</label>
+          <input type="text" id="cfg-tagline" class="form-control" value="CC Motocrafts AI Engine Labs Service • Hyderabad 2W (100cc–2500cc) & 4W (800cc–6500cc)">
+        </div>
+      </div>
+      <button class="btn btn-gold" onclick="saveGlobalConfig()">Save Global Contact & Branding Settings</button>
+    </div>
+
+    <!-- SECTION 2: REMOTE KILL-SWITCHES -->
+    <div class="card">
+      <div class="card-title">
+        <span>🛡️ Multi-Role Active Staff & Partner Device Session Monitor (Remote Kill-Switches)</span>
+      </div>
+      <p style="color: #94a3b8; font-size: 0.85rem; margin-top: -8px; margin-bottom: 16px;">
+        Click "🚨 Disconnect / Terminate Session" on any logged-in Service Manager, Marketing Manager, or Local Garage Partner to immediately revoke their auth token and lock their terminal into a restricted read-only "Access Revoked" screen.
+      </p>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Role & Operator</th>
+            <th>Device Fingerprint</th>
+            <th>IP Address & Location</th>
+            <th>Auth Token Status</th>
+            <th>Remote Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <strong>Operations & Marketing Desk</strong><br>
+              <small style="color: #94a3b8;">Staff: CC 1005 (Manager-01)</small>
+            </td>
+            <td>Chrome on macOS (M2 MacBook)</td>
+            <td>157.48.19.42 • Hitec City, Hyd</td>
+            <td>
+              <span id="mgr-status-badge" class="badge" style="background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid #10b981;">● ACTIVE</span>
+            </td>
+            <td>
+              <button id="mgr-kill-btn" class="btn btn-danger" style="padding: 6px 12px; font-size: 0.8rem;" onclick="toggleKillManager()">🚨 Disconnect Session</button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Banjara Hills Superbike Bay</strong><br>
+              <small style="color: #94a3b8;">Partner: CC 1010 (PARTNER-01)</small>
+            </td>
+            <td>Edge on Windows 11 (Workshop PC)</td>
+            <td>183.82.112.5 • Banjara Hills, Hyd</td>
+            <td>
+              <span id="partner-status-badge" class="badge" style="background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid #10b981;">● ACTIVE</span>
+            </td>
+            <td>
+              <button id="partner-kill-btn" class="btn btn-danger" style="padding: 6px 12px; font-size: 0.8rem;" onclick="toggleKillPartner()">🚨 Disconnect Session</button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Madhapur 4W Master Bay</strong><br>
+              <small style="color: #94a3b8;">Partner: CC 1010 (PARTNER-02)</small>
+            </td>
+            <td>Chrome on Android 14 (Mobile Terminal)</td>
+            <td>49.205.14.99 • Madhapur, Hyd</td>
+            <td>
+              <span class="badge" style="background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid #10b981;">● ACTIVE</span>
+            </td>
+            <td>
+              <button class="btn btn-danger" style="padding: 6px 12px; font-size: 0.8rem;" onclick="alert('Session terminated for PARTNER-02!')">🚨 Disconnect Session</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SECTION 3: SERVICES & PRICING CRUD -->
+    <div class="card">
+      <div class="card-title">
+        <span>⚡ Supreme Service & Pricing Master Manager (2W & 4W Full CRUD)</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 16px;">
+        <div class="form-group">
+          <label>Vehicle Division</label>
+          <select id="owner-new-srv-division" class="form-control">
+            <option value="2W">2-Wheeler (100cc–2500cc)</option>
+            <option value="4W">4-Wheeler (Cars/SUVs)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Service Title</label>
+          <input type="text" id="owner-new-srv-title" class="form-control" placeholder="e.g. Desmo Valve & Dyno Tuning">
+        </div>
+        <div class="form-group">
+          <label>Tier Price (₹)</label>
+          <input type="number" id="owner-new-srv-price" class="form-control" placeholder="e.g. 2499">
+        </div>
+        <div class="form-group">
+          <label>SLA & Description</label>
+          <input type="text" id="owner-new-srv-sla" class="form-control" placeholder="e.g. Free 10km Van Pickup • 6-Mo Warranty">
+        </div>
+      </div>
+      <button class="btn btn-gold" onclick="ownerAddService()">Add / Publish Master Service Tier</button>
+
+      <div style="margin-top: 24px;">
+        <h4 style="color: #cbd5e1; margin-bottom: 12px;">Active Catalog Services</h4>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Division</th>
+              <th>Service Title & Details</th>
+              <th>Live Price (₹)</th>
+              <th>Catalog Status</th>
+              <th>Master Control</th>
+            </tr>
+          </thead>
+          <tbody id="owner-services-table-body">
+            <!-- Populated by JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SECTION 4: WORK BAY CAMERAS MASTER OVERRIDE -->
+    <div class="card">
+      <div class="card-title">
+        <span>📹 Live Work Bay Cameras & Master Telemetry Switches</span>
+      </div>
+      <div class="cam-grid">
+        <div class="cam-box">
+          <div class="cam-screen">[BAY A • 2W DYNO TUNING]<br>LIVE 1080p ENCRYPTED FEED</div>
+          <div style="font-weight: 600; margin-bottom: 8px;">Bay A (Superbike Dyno Stream)</div>
+          <button id="owner-cam-1" class="btn btn-success" style="padding: 6px 14px; font-size: 0.8rem;" onclick="ownerToggleCam('owner-cam-1')">Feed: STREAMING LIVE</button>
+        </div>
+        <div class="cam-box">
+          <div class="cam-screen">[BAY B • 4W HYDRAULIC RAMP]<br>LIVE 1080p ENCRYPTED FEED</div>
+          <div style="font-weight: 600; margin-bottom: 8px;">Bay B (4W Supercar Ramp)</div>
+          <button id="owner-cam-2" class="btn btn-success" style="padding: 6px 14px; font-size: 0.8rem;" onclick="ownerToggleCam('owner-cam-2')">Feed: STREAMING LIVE</button>
+        </div>
+        <div class="cam-box">
+          <div class="cam-screen">[BAY C • CLEANROOM CALIBRATION]<br>LIVE 1080p ENCRYPTED FEED</div>
+          <div style="font-weight: 600; margin-bottom: 8px;">Bay C (Cleanroom Calibration)</div>
+          <button id="owner-cam-3" class="btn btn-success" style="padding: 6px 14px; font-size: 0.8rem;" onclick="ownerToggleCam('owner-cam-3')">Feed: STREAMING LIVE</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Owner Login
+    function ownerLogin() {
+      const pass = document.getElementById('owner-pass-input').value.trim();
+      if (pass === '000786000') {
+        localStorage.setItem('ccm_owner_auth', 'true');
+        showOwnerDashboard();
+      } else {
+        document.getElementById('owner-login-err').style.display = 'block';
+      }
+    }
+
+    function ownerLogout() {
+      localStorage.removeItem('ccm_owner_auth');
+      location.reload();
+    }
+
+    function showOwnerDashboard() {
+      document.getElementById('owner-login-view').style.display = 'none';
+      document.getElementById('owner-main-view').style.display = 'block';
+      renderOwnerServices();
+      loadSavedConfig();
+      updateKillSwitchBadges();
+    }
+
+    // Global Config
+    function saveGlobalConfig() {
+      const cfg = {
+        hotline: document.getElementById('cfg-hotline').value.trim(),
+        whatsapp: document.getElementById('cfg-whatsapp').value.trim(),
+        gmail1: document.getElementById('cfg-gmail1').value.trim(),
+        gmail2: document.getElementById('cfg-gmail2').value.trim(),
+        brand: document.getElementById('cfg-brand').value.trim(),
+        tagline: document.getElementById('cfg-tagline').value.trim()
+      };
+      localStorage.setItem('ccm_global_config', JSON.stringify(cfg));
+      alert('Global Business Contact, Dual-Gmail Telemetry & Branding settings saved and synchronized live across all portals!');
+    }
+
+    function loadSavedConfig() {
+      const saved = localStorage.getItem('ccm_global_config');
+      if (saved) {
+        try {
+          const cfg = JSON.parse(saved);
+          if (cfg.hotline) document.getElementById('cfg-hotline').value = cfg.hotline;
+          if (cfg.whatsapp) document.getElementById('cfg-whatsapp').value = cfg.whatsapp;
+          if (cfg.gmail1) document.getElementById('cfg-gmail1').value = cfg.gmail1;
+          if (cfg.gmail2) document.getElementById('cfg-gmail2').value = cfg.gmail2;
+          if (cfg.brand) document.getElementById('cfg-brand').value = cfg.brand;
+          if (cfg.tagline) document.getElementById('cfg-tagline').value = cfg.tagline;
+        } catch(e){}
+      }
+    }
+
+    // Remote Kill-Switches
+    function toggleKillManager() {
+      const isKilled = localStorage.getItem('ccm_kill_manager') === 'true';
+      if (isKilled) {
+        localStorage.setItem('ccm_kill_manager', 'false');
+        alert('Manager session RESTORED to Active.');
+      } else {
+        localStorage.setItem('ccm_kill_manager', 'true');
+        alert('🚨 MANAGER SESSION DISCONNECTED! The manager terminal will now show ACCESS REVOKED.');
+      }
+      updateKillSwitchBadges();
+    }
+
+    function toggleKillPartner() {
+      const isKilled = localStorage.getItem('ccm_kill_partner') === 'true';
+      if (isKilled) {
+        localStorage.setItem('ccm_kill_partner', 'false');
+        alert('Partner session RESTORED to Active.');
+      } else {
+        localStorage.setItem('ccm_kill_partner', 'true');
+        alert('🚨 PARTNER SESSION DISCONNECTED! The partner terminal will now show ACCESS REVOKED.');
+      }
+      updateKillSwitchBadges();
+    }
+
+    function updateKillSwitchBadges() {
+      const isMgrKilled = localStorage.getItem('ccm_kill_manager') === 'true';
+      const mgrBadge = document.getElementById('mgr-status-badge');
+      const mgrBtn = document.getElementById('mgr-kill-btn');
+      if (isMgrKilled) {
+        mgrBadge.style.background = 'rgba(239, 68, 68, 0.2)';
+        mgrBadge.style.color = '#ef4444';
+        mgrBadge.style.borderColor = '#ef4444';
+        mgrBadge.textContent = '✕ REVOKED';
+        mgrBtn.className = 'btn btn-success';
+        mgrBtn.textContent = 'Restore Access';
+      } else {
+        mgrBadge.style.background = 'rgba(16, 185, 129, 0.2)';
+        mgrBadge.style.color = '#10b981';
+        mgrBadge.style.borderColor = '#10b981';
+        mgrBadge.textContent = '● ACTIVE';
+        mgrBtn.className = 'btn btn-danger';
+        mgrBtn.textContent = '🚨 Disconnect Session';
+      }
+
+      const isPartnerKilled = localStorage.getItem('ccm_kill_partner') === 'true';
+      const pBadge = document.getElementById('partner-status-badge');
+      const pBtn = document.getElementById('partner-kill-btn');
+      if (isPartnerKilled) {
+        pBadge.style.background = 'rgba(239, 68, 68, 0.2)';
+        pBadge.style.color = '#ef4444';
+        pBadge.style.borderColor = '#ef4444';
+        pBadge.textContent = '✕ REVOKED';
+        pBtn.className = 'btn btn-success';
+        pBtn.textContent = 'Restore Access';
+      } else {
+        pBadge.style.background = 'rgba(16, 185, 129, 0.2)';
+        pBadge.style.color = '#10b981';
+        pBadge.style.borderColor = '#10b981';
+        pBadge.textContent = '● ACTIVE';
+        pBtn.className = 'btn btn-danger';
+        pBtn.textContent = '🚨 Disconnect Session';
+      }
+    }
+
+    // Services CRUD
+    let ownerServices = [
+      { id: 1, div: '2W', title: '2W Master Periodic Service + 42-Point Check', price: 1450, sla: '35-45 Mins • 6-Mo Warranty', live: true },
+      { id: 2, div: '2W', title: 'Superbike & Commuter Tappet, CVT & ECU Calibration', price: 3499, sla: '30-45 Mins VIP Pickup', live: true },
+      { id: 3, div: '4W', title: '4W 40-Point Pre-Delivery & Periodic Service', price: 3499, sla: '45-60 Mins Flatbed Pickup', live: true },
+      { id: 4, div: '4W', title: '4W Climate Control AC Overhaul & Transmission Check', price: 4999, sla: '60 Mins Hydraulic Tow', live: true }
+    ];
+
+    function renderOwnerServices() {
+      const tbody = document.getElementById('owner-services-table-body');
+      tbody.innerHTML = ownerServices.map(s => `
+        <tr>
+          <td><span class="badge ${s.div === '2W' ? 'badge-cyan' : 'badge-gold'}">${s.div}</span></td>
+          <td><strong>${s.title}</strong><br><small style="color: #94a3b8;">${s.sla}</small></td>
+          <td><input type="number" class="form-control" style="width: 100px; padding: 4px 8px;" value="${s.price}" onchange="ownerUpdatePrice(${s.id}, this.value)"></td>
+          <td>
+            <button class="btn ${s.live ? 'btn-success' : 'btn-danger'}" style="padding: 4px 10px; font-size: 0.75rem;" onclick="ownerToggleLive(${s.id})">
+              ${s.live ? '● Live' : '○ Hidden'}
+            </button>
+          </td>
+          <td>
+            <button class="btn btn-outline" style="padding: 4px 10px; font-size: 0.75rem; color: #ef4444;" onclick="ownerDeleteService(${s.id})">Delete</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function ownerAddService() {
+      const div = document.getElementById('owner-new-srv-division').value;
+      const title = document.getElementById('owner-new-srv-title').value.trim();
+      const price = parseInt(document.getElementById('owner-new-srv-price').value) || 999;
+      const sla = document.getElementById('owner-new-srv-sla').value.trim() || 'Quick Pickup • Warranty';
+      if (!title) { alert('Please enter a service title'); return; }
+      ownerServices.push({ id: Date.now(), div, title, price, sla, live: true });
+      renderOwnerServices();
+      alert(`Master Service "${title}" published live across all portals!`);
+    }
+
+    function ownerUpdatePrice(id, newPrice) {
+      const s = ownerServices.find(x => x.id === id);
+      if (s) s.price = parseInt(newPrice);
+      alert('Price updated by Master Owner authority!');
+    }
+
+    function ownerToggleLive(id) {
+      const s = ownerServices.find(x => x.id === id);
+      if (s) {
+        s.live = !s.live;
+        renderOwnerServices();
+      }
+    }
+
+    function ownerDeleteService(id) {
+      ownerServices = ownerServices.filter(x => x.id !== id);
+      renderOwnerServices();
+    }
+
+    function ownerToggleCam(btnId) {
+      const btn = document.getElementById(btnId);
+      if (btn.classList.contains('btn-success')) {
+        btn.classList.remove('btn-success');
+        btn.classList.add('btn-danger');
+        btn.textContent = 'Feed: PAUSED (Master Kill)';
+      } else {
+        btn.classList.remove('btn-danger');
+        btn.classList.add('btn-success');
+        btn.textContent = 'Feed: STREAMING LIVE';
+      }
+    }
+
+    // Auto-login
+    if (localStorage.getItem('ccm_owner_auth') === 'true') {
+      showOwnerDashboard();
+    }
+  </script>
+</body>
+</html>
